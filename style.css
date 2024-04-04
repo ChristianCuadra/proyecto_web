@@ -1,4 +1,24 @@
 body{
-    background-image: url(fondo.avif);
-    background-size: 100%;
+    background-color: rgb(24, 8, 29);
+}
+
+#cards_centradas{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+    margin-right: 5% ;
+    margin-top: 7%;
+}
+
+.centrado-flexbox {
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+}
+
+#cards_mas_pequennias{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 30px;
 }
