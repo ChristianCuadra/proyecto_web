@@ -4,15 +4,15 @@ body{
 }
 
 .container{
-    width: 100%;
+    width: 70%;
     display: flex;
     max width: 1100px ;
 }
 
-.card{
+.card_prod{
     width: 100%;
     margin: 20px;
-    margin-top: 200px;
+    margin-top: 100px;
     border-radius: 6px;
     overflow: hidden;
     background-color: aliceblue;
@@ -20,16 +20,31 @@ body{
     transition: all 400ms ease;
 }
 
-.card:hover{
+.card_prod:hover{
     transform: translateY(-3%);
 }
-.card img{
+.card_prod img{
     width: 100%;
     height: 210px;
 
 }
 
 
-.boton button{
+.card_prod a{
     align-items: center;
+}
+
+.card-text{
+    margin: 10px;
+
+}
+
+.card-title{
+ text-align: center;
+
+}
+
+.btn btn-primary{
+align-items: center;
+
 }
