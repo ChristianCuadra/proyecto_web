@@ -2,3 +2,34 @@ body{
     background-image: url(fondo.avif);
     background-size: 100%;
 }
+
+.container{
+    width: 100%;
+    display: flex;
+    max width: 1100px ;
+}
+
+.card{
+    width: 100%;
+    margin: 20px;
+    margin-top: 200px;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: aliceblue;
+    cursor: default;
+    transition: all 400ms ease;
+}
+
+.card:hover{
+    transform: translateY(-3%);
+}
+.card img{
+    width: 100%;
+    height: 210px;
+
+}
+
+
+.boton button{
+    align-items: center;
+}
