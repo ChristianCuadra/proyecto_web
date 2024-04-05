@@ -3,20 +3,29 @@ body{
     background-size: 100%;
 }
 .container{
-    width: 70%;
+    width: 80%;
     display: flex;
     max width: 1100px ;
 }
 
 .card_prod{
     width: 100%;
-    margin: 20px;
+    margin: 2px;
+    height: 72%;
     margin-top: 100px;
+    margin-bottom: 100px;
     border-radius: 6px;
     overflow: hidden;
     background-color: aliceblue;
     cursor: default;
     transition: all 400ms ease;
+}
+
+.Titulo_prod{
+    margin-top: 40px;
+    color: aliceblue;
+    font-family: 'Times New Roman', Times, serif;
+
 }
 
 .card_prod:hover{
@@ -43,10 +52,6 @@ body{
 
 }
 
-.btn btn-primary{
-align-items: center;
-}
-
 #cards_centradas{
     text-align: center;
     display: flex;
@@ -55,6 +60,18 @@ align-items: center;
     margin-right: 5% ;
     margin-top: 7%;
 }
+
+.card_prod .parrafo{
+
+    margin-top: 10%;
+    text-align: center;
+    margin-bottom: 10%;
+
+}
+
+
+
+
 
 .centrado-flexbox {
     display: flex;
