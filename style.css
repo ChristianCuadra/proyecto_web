@@ -1,13 +1,17 @@
 body{
-    
     background-image: url(img_fondo.jpg);
     background-repeat: no-repeat;
-    background-size: cover ;
+    background-size: cover;
 }
+
+.body-vista-productos{
+    overflow: hidden;
+}
+
 .container{
     width: 80%;
     display: flex;
-    max width: 1100px ;
+    max-width: 1100px ;
 }
 
 .card_prod{
@@ -50,7 +54,7 @@ body{
 }
 
 .card-title{
- text-align: center;
+    text-align: center;
 
 }
 
@@ -64,16 +68,11 @@ body{
 }
 
 .card_prod .parrafo{
-
     margin-top: 10%;
     text-align: center;
     margin-bottom: 10%;
 
 }
-
-
-
-
 
 .centrado-flexbox {
     display: flex;
@@ -82,6 +81,7 @@ body{
 }
 
 #cards_mas_pequennias{
+    display: flex;
     margin-left: 15%;
     margin-right: 15%;
     margin-bottom: 30px;
@@ -89,4 +89,64 @@ body{
 
 #img_cards{
     margin: 15px;
+}
+
+/* CARROUSEL VISTA PRODUCTO */
+.carousel-container-producto {
+    flex: 1;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    height: 400px; /* Altura del contenedor */
+    width: 60%; /* Opcional: ocupa todo el ancho disponible */
+}
+
+.carousel-wrapper-producto {
+    display: flex;
+    flex-direction: column; /* Establece la dirección de apilamiento en vertical */
+    scroll-snap-type: y mandatory;
+}
+
+.carousel-slide-producto {
+    flex: 0 0 auto;
+    height: 100%; /* Opcional: ocupa toda la altura del contenedor */
+    scroll-snap-align: start;
+}
+
+.carousel-slide-producto img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* CONTAINERS VISTA PRODUCTO*/
+.container-vista-producto{ 
+    margin-top:10%;
+    margin-bottom: 13%;
+}
+
+.container-v-prod {
+    display: flex;
+    align-content:flex-start;
+}
+
+.text-container-vista-producto {
+    flex: 1;
+    padding: 20px;
+}
+
+/* CUADRO DE COLOR CON COSAS DENTRO */
+.cuadrado-vista-producto {
+    width: 800px; /* Ancho del cuadrado */
+    height: 400px; /* Altura del cuadrado */
+    background-color: #8a6e8d; /* Color de fondo del cuadrado */
+    color: #ffffff; /* Color del texto */
+    border-radius: 20px; /* Radio de los bordes, ajusta según sea necesario */
+}
+
+/* BOTONES */
+
+.botones-vista-producto {
+    position: absolute; /* Posiciona los botones de forma absoluta */
+    bottom: 10px; /* Ajusta la distancia desde la parte inferior del cuadro */
+    left: 70%; /* Centra los botones horizontalmente */
+    transform: translateX(20%); /* Corrige la posición para que estén centrados */
 }
