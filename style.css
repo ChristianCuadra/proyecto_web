@@ -4,10 +4,6 @@ body{
     background-size: cover;
 }
 
-.body-vista-productos{
-    overflow: hidden;
-}
-
 .container{
     width: 80%;
     display: flex;
@@ -56,15 +52,6 @@ body{
 .card-title{
     text-align: center;
 
-}
-
-#cards_centradas{
-    text-align: center;
-    display: flex;
-    align-items: center;
-    margin-left: 5%;
-    margin-right: 5% ;
-    margin-top: 7%;
 }
 
 .card_prod .parrafo{
