@@ -6,7 +6,6 @@ body{
 
 .container{
     width: 80%;
-    display: flex;
     max-width: 1100px ;
 }
 
@@ -134,6 +133,6 @@ body{
 .botones-vista-producto {
     position: absolute; /* Posiciona los botones de forma absoluta */
     bottom: 10px; /* Ajusta la distancia desde la parte inferior del cuadro */
-    left: 70%; /* Centra los botones horizontalmente */
+    left: 60%; /* Centra los botones horizontalmente */
     transform: translateX(20%); /* Corrige la posición para que estén centrados */
 }
