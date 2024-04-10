@@ -80,6 +80,12 @@ body{
 #cards_mas_pequennias{
     display: flex;
     margin: 10%;
+    cursor: default;
+    transition: all 400ms ease;
+} 
+
+#cards_mas_pequennias:hover{
+    transform: translateY(-3%);
 }
 
 #img_cards{
