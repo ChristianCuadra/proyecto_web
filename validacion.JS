@@ -30,18 +30,14 @@ function validar(){
         }
         else{
             document.getElementById("spancontra").textContent = "";
+            var largo = contrasenna.length;
+            if(largo<8 || largo>25){
+                document.getElementById("spancontra").textContent = "La contraseña debe tener minimo 8 caracteres y máximo 25.";
+            }
+            else{
+                document.getElementById("spancontra").textContent = "";
+            }
         }
 
 
-        if (contrasenna.length<8 && contrasenna.length>25){
-            document.getElementById("spancontra").textContent = "La contraseña debe contener minimo 8 caracteres y máximo 25";
-        }
-        else{
-            document.getElementById("spancontra").textContent ="";
-        }
-
-
-
-
-
-    }
+}
