@@ -94,10 +94,11 @@
             class="nav-link active"
             aria-current="page"
             href="productos.html"
-            >Productos</a
-  >
-          </li>
-        </ul>
+            >Productos
+          </a>
+        </li>
+      </ul>
+
         <form class="d-flex" role="search" style="margin-right: 30%">
           <input
             class="form-control me-2"
@@ -132,95 +133,45 @@
                         <h3 class="text-center"><b>Informaci&oacute;n del usuario</b></h3>
                     </div>
                     <div class="card-body">
-                        <form class="mb-3 row needs-validation" novalidate>
+                        <form class="mb-3 row" id="formulario">
                             <label for="nombre1" class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-form-label">Nombres</label>
                             <div class="col-sm-10 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                <input type="text" id="nombre1" class="form-control" required>
-                                <div class="valid-feedback">
-                                    Todo bien
-                                </div>
-                                <div class="invalid-feedback">
-                                    Es necesario poner un nombre
-                                </div>
+                                <input type="text" id="nombre1" class="form-control"  placeholder="Ingresa Nombres">
+                                <span id="spannombre"  style="color: red;" style="font-size: 14px ;" style="font-family: Arial, Helvetica, sans-serif;"></span> 
                             </div>
                             <label for="apellido1" class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-form-label">Apellidos</label>
                             <div class="col-sm-10 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                <input type="text" id="apellido1" class="form-control" required>
-                                <div class="valid-feedback">
-                                    Todo bien
-                                </div>
-                                <div class="invalid-feedback">
-                                    Es necesario poner un apellido
-                                </div>
+                                <input type="text" id="apellido1" class="form-control"  placeholder="Ingresa Apellidos">
+                                <span id="spanapellido"  style="color: red;" style="font-size: 14px ;" style="font-family: Arial, Helvetica, sans-serif;"></span> 
                             </div>
                         <br>
                         <br>
                         <br>
                         <hr><br>
-                        <div class="row mb-3">
-                                <div class="my-2">
-                                    <label for="email1" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="email1" required>
-                                    <div class="valid-feedback">
-                                        Todo bien
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Es necesario poner el mail
-                                    </div>
-                                </div>
-                                <div class="my-2">
-                                    <label for="password1" class="form-label">Contrase&ntilde;a</label>
-                                    <input type="password" class="form-control" id="password1" required>
-                                    <div class="valid-feedback">
-                                        Todo bien
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Es necesario poner la contraseña
-                                    </div>
-                                </div>
-                                <div class="text-end">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardar">
-                                        Guardar informacion
-                                    </button>
-                                </div>
-                                <div class="modal fade" id="guardar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Quiere guardar la informacion?</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                        Los cambios podran ser modificados en caso de ser necesario
-                                        </div>
-                                        <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                          <div class="row mb-3">
+                            <div class="my-2">
+                              <label for="email1" class="form-label">Email</label>
+                              <input type="email" class="form-control" id="email1"  placeholder="Ingresa Correo">
+                              <span id="spancorreo"  style="color: red;" style="font-size: 14px ;" style="font-family: Arial, Helvetica, sans-serif;"></span> 
+                            </div>
+                            <div class="my-2">
+                              <label for="password1" class="form-label">Contrase&ntilde;a</label>
+                              <input type="password" class="form-control" id="password1" placeholder="Ingresa Contraseña">
+                              <span id="spancontra"  style="color: red;" style="font-size: 14px ;" style="font-family: Arial, Helvetica, sans-serif;"></span> 
+                            </div>
+                            <div class="text-end">
+                              <button  onclick="validar()"     type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardar">
+                                Guardar informacion
+                            </button>
+                            </div>
+                            
+                        </form>
+                      </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script>
-            (() => {
-            'use strict'
-            const forms = document.querySelectorAll('.needs-validation')
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-                form.classList.add('was-validated')
-                }, false)
-            })
-            })()
-        </script>
+      
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                     <div class="card">
@@ -267,5 +218,7 @@
             </div>
         </div>
     </div>
+    <script src="validacion.JS"></script>
+    <footer data-bs-theme="dark">©2024 DUOC UC</footer>
 </body>
 </html>
