@@ -210,3 +210,16 @@ padding-top: 10px;
     padding: 50px 0;
     background-color: #dcdcdc; 
 }
+
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#gallery img {
+    width: 300px;
+    height: 300px; /* Ajusta el tamaño de acuerdo a tus preferencias */
+    object-fit: cover;
+    margin: 10px;
+    border-radius: 50%; /* Esto hace que la imagen sea redonda */
+}
