@@ -9,13 +9,13 @@ $(function(){
 
     $("#borrar2").click(function(){
 
-        $("#card2").hide();
+        $("#card2").fadeOut();
 
     });
 
     $("#borrar3").click(function(){
 
-        $("#card3").hide();
+        $("#card3").fadeOut();
 
     });
 
