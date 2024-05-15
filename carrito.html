@@ -124,7 +124,7 @@
         <div id="containerPadreCarrito" class="container card">
          
               <div id="containerProductosCarrito"class=" container">
-                <div class="card">
+                <div class="card" id="card1">
                   <hr>
                   <div class="row g-0">
                     <div class="col-md-4">
@@ -137,24 +137,12 @@
                       </div>
                     </div>
                     <div class="col-md-2 quitarProducto">
-                      <img class="iconClose" width="20px" src="fotos/closeIcon.png">
+                      <button id="borrar1">X</button>
                     </div>
                   </div>
                   <hr>
-                  <div class="row g-0">
-                    <div class="col-md-4">
-                      <img src="fotos/img_default_productos.jpg" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-6">
-                      <div class="card-body">
-                        <h5 class="card-title" style="text-align: left;">Hp laptop</h5>
-                        <p class="card-text" style="text-align: left;">$200.000</p>
-                      </div>
-                    </div>
-                    <div class="col-md-2 quitarProducto">
-                      <img class="iconClose" width="20px" src="fotos/closeIcon.png">
-                    </div>
-                  </div>
+                </div>
+                <div class="card" id="card2">
                   <hr>
                   <div class="row g-0">
                     <div class="col-md-4">
@@ -167,7 +155,25 @@
                       </div>
                     </div>
                     <div class="col-md-2 quitarProducto">
-                      <img class="iconClose" width="20px" src="fotos/closeIcon.png">
+                      <button id="borrar2">X</button>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+                <div class="card" id="card3">
+                  <hr>
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="fotos/img_default_productos.jpg" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card-body">
+                        <h5 class="card-title" style="text-align: left;">Hp laptop</h5>
+                        <p class="card-text" style="text-align: left;">$200.000</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 quitarProducto">
+                      <button id="borrar3">X</button>
                     </div>
                   </div>
                   <hr>
@@ -188,4 +194,9 @@
     </div>
   </div>
 
-</body></html>
+  <script src="https://code.jquery.com/jquery-3.7.1.js">
+  </script>
+  <script src="jquery.js"></script>  
+
+</body>
+</html>
