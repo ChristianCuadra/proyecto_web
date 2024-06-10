@@ -1,0 +1,85 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block body %}
+
+  <div class="DivPadre">
+    <div class="container-vista-producto">
+      <div id="cards_mas_pequennias" style="transform:none;">
+        <div id="containerPadreCarrito" class="container card">
+         
+              <div id="containerProductosCarrito"class=" container">
+                <div class="card" id="card1">
+                  <hr>
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="{% static 'fotos/img_default_productos' %}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card-body">
+                        <h5 class="card-title" style="text-align: left;">Hp laptop</h5>
+                        <p class="card-text" style="text-align: left;">$200.000</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 quitarProducto">
+                      <button id="borrar1">X</button>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+                <div class="card" id="card2">
+                  <hr>
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="{% static 'fotos/img_default_productos' %}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card-body">
+                        <h5 class="card-title" style="text-align: left;">Hp laptop</h5>
+                        <p class="card-text" style="text-align: left;">$200.000</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 quitarProducto">
+                      <button id="borrar2">X</button>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+                <div class="card" id="card3">
+                  <hr>
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="{% static 'fotos/img_default_productos' %}" class="img-fluid rounded-start" alt="PC HP">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card-body">
+                        <h5 class="card-title" style="text-align: left;">Hp laptop</h5>
+                        <p class="card-text" style="text-align: left;">$200.000</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 quitarProducto">
+                      <button id="borrar3">X</button>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+
+          <div id="cardFooter" class="container card-footer">
+
+
+          <div class="btn btn-primary cuadrado-subtotal" style="font-weight: bolder;width: 100%">Total: $600.000</div>
+          <br></br>
+          
+          <button class="btn btn-primary cuadrado-checkout" style="font-weight: bolder;width: 100%">Comprar</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js">
+  </script>
+  <script src="{% static 'jquery.js' %}"></script>  
+
+{% endblock %}
