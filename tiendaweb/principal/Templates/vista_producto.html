@@ -12,25 +12,19 @@
                 <div class="carousel-container-producto">
                   <div class="carousel-wrapper-producto">
                     <div class="carousel-slide-producto">
-                      <img src="fotos/img_carrousel-2.png" alt="Slide 1" />
+                      <img src="{% static 'fotos/img_carrousel-2.png' %}" alt="Slide 1" />
                     </div>
                     <div class="carousel-slide-producto">
-                      <img
-                        src="fotos/img_default_productos.jpg"
-                        alt="Slide 2"
-                      />
+                      <img src="{% static 'fotos/img_default_productos.jpg' %}" alt="Slide 2" />
                     </div>
                     <div class="carousel-slide-producto">
-                      <img src="fotos/img_carrousel.png" alt="Slide 3" />
+                      <img src="{% static 'fotos/img_carrousel.png' %}" alt="Slide 3" />
                     </div>
                     <div class="carousel-slide-producto">
-                      <img
-                        src="fotos/img_default_productos.jpg"
-                        alt="Slide 3"
-                      />
+                      <img src="{% static 'fotos/img_default_productos.jpg' %}" alt="Slide 4" />
                     </div>
                     <div class="carousel-slide-producto">
-                      <img src="fotos/img_carrousel-2.png" alt="Slide 3" />
+                      <img src="{% static 'fotos/img_carrousel-2.png' %}" alt="Slide 5" />
                     </div>
                   </div>
                 </div>
@@ -96,7 +90,7 @@
                     </a>
                   </div>
                   <div class="col-12">
-                    <a href="carrito.html">
+                    <a href="{% url 'carrito' %}">
                       <button
                         type="button"
                         class="btn btn-dark"
