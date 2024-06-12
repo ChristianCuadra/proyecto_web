@@ -23,6 +23,14 @@ function validar(){
             document.getElementById("spancorreo").textContent ="";
         }
 
+        var usuario =  document.getElementById("usuario").value;
+        if (usuario == "" || usuario == null){
+            document.getElementById("spanusuario").textContent = "Debe ingresar un usuario";
+        }
+        else{
+            document.getElementById("spanusuario").textContent ="";
+        }
+
         
         var contrasenna = document.getElementById("password1").value;
         if (contrasenna == "" || contrasenna == null){
@@ -36,6 +44,21 @@ function validar(){
             }
             else{
                 document.getElementById("spancontra").textContent = "";
+            }
+        }
+
+        var contrasenna2 = document.getElementById("password2").value;
+        if (contrasenna2 == "" || contrasenna2 == null){
+            document.getElementById("spancontras").textContent = "Debe ingresar una contraseña.";
+        }
+        else{
+            document.getElementById("spancontras").textContent = "";
+            var largo = contrasenna2.length;
+            if(largo<8 || largo>25){
+                document.getElementById("spancontras").textContent = "La contraseña debe tener minimo 8 caracteres y máximo 25.";
+            }
+            else{
+                document.getElementById("spancontras").textContent = "";
             }
         }
 

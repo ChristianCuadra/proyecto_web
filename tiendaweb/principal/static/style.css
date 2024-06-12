@@ -220,8 +220,8 @@ padding-top: 10px;
 
 #gallery img {
     width: 300px;
-    height: 300px; /* Ajusta el tamaño de acuerdo a tus preferencias */
+    height: 300px; 
     object-fit: cover;
     margin: 10px;
-    border-radius: 50%; /* Esto hace que la imagen sea redonda */
+    border-radius: 50%; 
 }
