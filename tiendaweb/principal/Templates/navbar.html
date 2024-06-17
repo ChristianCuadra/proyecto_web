@@ -117,9 +117,24 @@
                 Buscar
               </button>
             </form>
-            <a href="{% url 'perfil' %}" style="margin-left: 20px">
-              <img src="{% static 'fotos/usuario.png' %}" alt="usuario" />
-            </a>
+          <ul>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link active dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="color: white;"
+              >
+                Información
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'registro' %}">Registro</a></li>
+                <li><a class="dropdown-item" href="{% url 'login' %}">Iniciar sesión</a></li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </ul>
             <a href="{% url 'carrito' %}" style="margin-left: 20px">
               <img src="{% static 'fotos/carrito.png' %}" alt="carrito" />
             </a>

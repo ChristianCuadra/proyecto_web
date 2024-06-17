@@ -1,0 +1,42 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container">
+    <div class="mb-3 row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-9 col-xxl-9">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center"><b>Inicio de sesión</b></h3>
+                </div>
+                <form class="mb-3 row" id="formulario" method="POST">
+                    {% csrf_token %}
+                      <div class="row mb-3">
+                        <div class="my-2">
+                          <label for="Usuario" class="form-label">Usuario</label>
+                          <input type="text" class="form-control" id="usuario"  placeholder="Ingresa nombre de usuario">
+                        </div>
+                        <div class="my-2">
+                          <label for="password1" class="form-label">Contrase&ntilde;a</label>
+                          <input type="password" class="form-control" id="password1" placeholder="Ingresa Contraseña"  min="8" maxlength="25">
+                          <span id="spancontra"  style="color: red;" style="font-size: 14px ;" style="font-family: Arial, Helvetica, sans-serif;"></span> 
+                        </div>
+                        <div class="text-end">
+                          <button  onclick="validar()"     type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardar">
+                            Guardar informacion
+                        </button>
+                        </div>
+                        {% if mensaje %}
+                            <p style="color: red;"> {{ mensaje }} </p>
+      
+                        {% endif %}
+                        
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock  %}
