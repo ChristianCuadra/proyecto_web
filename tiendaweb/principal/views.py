@@ -12,11 +12,11 @@ def productos(request):
     return render(request , 'productos.html')
 
 def perfil(request):
-    usuario = get_user_model('username')
-    nombre = get_user_model('first_name')
-    apellido = get_user_model('last_name')
-    correo = get_user_model('email')
-    return render(request , 'perfil_usuario.html', {'usuario': usuario},{'nombre':nombre},{'apellido':apellido},{'correo':correo} )
+    usuario = request.user.username
+    nombre = request.user.first_name
+    apellido = request.user.last_name
+    correo = request.user.email
+    return render(request , 'perfil_usuario.html', {'usuario': usuario,'nombre':nombre,'apellido':apellido,'correo':correo} )
 
 def vista_producto(request):
     return render(request , 'vista_producto.html')
@@ -80,3 +80,8 @@ def iniciar_sesion(request):
 def salir(request):
     logout(request)
     return render(request,'index.html')
+
+
+
+def modificar(request):
+    return render(request, 'modificar.html')

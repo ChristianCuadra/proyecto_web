@@ -130,9 +130,16 @@
                 Información
               </a>
               <ul class="dropdown-menu">
+              {% if user.is_authenticated %}
+
+                <li><a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a></li>
+                <li><a class="dropdown-item" href="{% url 'salir' %}"> Cerrar sesión</a></li>
+                <li><hr class="dropdown-divider" /></li>
+              {% else %}
                 <li><a class="dropdown-item" href="{% url 'registro' %}">Registro</a></li>
                 <li><a class="dropdown-item" href="{% url 'login' %}">Iniciar sesión</a></li>
                 <li><hr class="dropdown-divider" /></li>
+              {% endif %}
               </ul>
             </ul>
             <a href="{% url 'carrito' %}" style="margin-left: 20px">
