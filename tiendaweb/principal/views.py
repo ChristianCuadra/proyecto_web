@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.db import IntegrityError
 
 
@@ -60,12 +60,12 @@ def iniciar_sesion(request):
             usuario = request.POST.get('usuario')
             password = request.POST.get('password1')
             try:
-                user = get_user_model(username=usuario)
-            except user.DoesNotExist:
+                user = User.objects.get(username=usuario)
+                print(user)
+            except User.DoesNotExist:
                 return render(request, 'login.html', {'mensaje': 'Usuario no existe'})
-            if user is None:
                 user = None
-            elif user is not None:
+            if user is not None:
                 user = authenticate(request, username=usuario, password=password)
                 login(request, user)
                 return render(request, 'perfil_usuario.html')
@@ -76,3 +76,7 @@ def iniciar_sesion(request):
     except Exception as error:
         print(error)
 
+
+def salir(request):
+    logout(request)
+    return render(request,'index.html')
