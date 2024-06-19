@@ -13,19 +13,29 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-9 col-xxl-9">
                 <div class="card">
                     <div class="card-header">
+                        {% if user.is_authenticated %}
+                        <h3 class="text-center"><b>Bienvenido {{user.username}}</b></h3>
+                        {% else %}
                         <h3 class="text-center"><b>Informaci&oacute;n del usuario</b></h3>
+                        {% endif %}
                     </div>
                     <div class="card-body">
                         <form class="mb-3 row" id="formulario">
-                            <label for="nombre1" class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-form-label">Nombres</label>
+                            <label for="nombre1" class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-form-label">Nombre</label>
                             <div class="col-sm-10 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                <input type="text" id="nombre1" class="form-control"  placeholder="Ingresa Nombres">
-                                <span id="spannombre"  style="color: red;" style="font-size: 14px ;" style="font-family: Arial, Helvetica, sans-serif;"></span> 
+                                {% if user.is_authenticated %}
+                                <h3 class="text-center"><b>{{user.first_name}}</b></h3>
+                                {% else %}
+                                <h3 class="text-center"></h3>
+                                {% endif %}
                             </div>
                             <label for="apellido1" class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-form-label">Apellidos</label>
                             <div class="col-sm-10 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                <input type="text" id="apellido1" class="form-control"  placeholder="Ingresa Apellidos">
-                                <span id="spanapellido"  style="color: red;" style="font-size: 14px ;" style="font-family: Arial, Helvetica, sans-serif;"></span> 
+                                {% if user.is_authenticated %}
+                                <h3 class="text-center"><b>{{user.last_name}}</b></h3>
+                                {% else %}
+                                <h3 class="text-center"></h3>
+                                {% endif %}
                             </div>
                         <br>
                         <br>
@@ -34,20 +44,21 @@
                           <div class="row mb-3">
                             <div class="my-2">
                               <label for="email1" class="form-label">Email</label>
-                              <input type="email" class="form-control" id="email1"  placeholder="Ingresa Correo">
-                              <span id="spancorreo"  style="color: red;" style="font-size: 14px ;" style="font-family: Arial, Helvetica, sans-serif;"></span> 
+                                {% if user.is_authenticated %}
+                                <h3 class="text-center"><b>{{user.email}}</b></h3>
+                                {% else %}
+                                <h3 class="text-center"></h3>
+                                {% endif %}
                             </div>
-                            <div class="my-2">
-                              <label for="password1" class="form-label">Contrase&ntilde;a</label>
-                              <input type="password" class="form-control" id="password1" placeholder="Ingresa Contraseña"  min="8" maxlength="25">
-                              <span id="spancontra"  style="color: red;" style="font-size: 14px ;" style="font-family: Arial, Helvetica, sans-serif;"></span> 
-                            </div>
-                            <div class="text-end">
-                              <button  onclick="validar()"     type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardar">
-                                Guardar informacion
-                            </button>
-                            </div>
-                            
+                            <br>
+                            <a href="{% url 'modificar' %}" > 
+                                <br>
+                                <button  type="button" class="btn btn-primary" data-bs-toggle="modal" style="margin-left: 40%;">
+                                Modificar informacion
+                                </button>
+                           </a>
+
+
                         </form>
                       </div>
                     </div>
@@ -102,5 +113,4 @@
         </div>
     </div>
     <script src="{% static 'validacion.JS' %}"></script><br> <br> <br>
-    <footer data-bs-theme="dark">©2024 DUOC UC</footer>
 {% endblock %}
