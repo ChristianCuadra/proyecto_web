@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.db import IntegrityError
@@ -63,14 +63,17 @@ def iniciar_sesion(request):
                 user = User.objects.get(username=usuario)
                 print(user)
             except User.DoesNotExist:
-                return render(request, 'login.html', {'mensaje': 'Usuario no existe'})
                 user = None
-            if user is not None:
-                user = authenticate(request, username=usuario, password=password)
-                login(request, user)
-                return render(request, 'perfil_usuario.html')
+            if user is None:
+                return render(request,'login.html', {'mensaje': 'Usuario no existe'})
             else:
-                return render(request, 'login.html',{'mensaje': 'Contraseña incorrecta'})
+
+                if user is not None:
+                    user = authenticate(request, username=usuario, password=password)
+                    login(request, user)
+                    return render(request, 'perfil_usuario.html')
+                else:
+                    return render(request, 'login.html',{'mensaje': 'Contraseña incorrecta'})
         elif request.method == 'GET':
             return render(request, 'login.html')
     except Exception as error:
@@ -83,5 +86,29 @@ def salir(request):
 
 
 
-def modificar(request):
-    return render(request, 'modificar.html')
+def modificar(request, username):
+    try:
+        usuario = get_object_or_404(User, username=username)
+        if request.user.is_authenticated:
+            user = request.user.first_name
+            print(f"Esta validado {user}")
+            if request.method == 'POST':
+                user = User.objects.get(username=usuario)
+                user.first_name = request.POST.get("nombre1")
+                user.username = request.POST.get("usuario")
+                user.last_name = request.POST.get("apellido1")
+                user.email = request.POST.get("email1")
+                
+                user.save()
+
+                return redirect('perfil') 
+            elif request.method =='GET':
+                return render(request, 'modificar.html')
+    except Exception as error:
+        print(error)
+
+
+def eliminar_usuario(request, username):
+    usuario = get_object_or_404(User, username=username)
+    usuario.delete()
+    return redirect('inicio')

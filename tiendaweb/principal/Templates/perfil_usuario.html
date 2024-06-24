@@ -51,12 +51,18 @@
                                 {% endif %}
                             </div>
                             <br>
-                            <a href="{% url 'modificar' %}" > 
+                            <a href="{% url 'modificar' user.username %}" > 
                                 <br>
                                 <button  type="button" class="btn btn-primary" data-bs-toggle="modal" style="margin-left: 40%;">
                                 Modificar informacion
                                 </button>
                            </a>
+                           <a href="{% url 'eliminar' user.username %}" > 
+                            <br>
+                            <button  type="button" class="btn btn-primary" data-bs-toggle="modal" style="margin-left: 40%;" style="color: red;">
+                             Eliminar usuario
+                            </button>
+                            </a>
 
 
                         </form>

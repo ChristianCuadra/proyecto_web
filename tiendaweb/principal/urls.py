@@ -10,5 +10,6 @@ urlpatterns = [
     path('registro/',views.registro, name='registro'),
     path('login/', views.iniciar_sesion, name='login'),
     path('salir/', views.salir, name="salir"),
-    path('modificar/', views.modificar, name="modificar")
+    path('modificar/<str:username>/', views.modificar, name="modificar"),
+    path('eliminar/<str:username>/', views.eliminar_usuario, name="eliminar")  
 ]
