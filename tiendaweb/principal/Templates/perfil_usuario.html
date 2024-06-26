@@ -57,12 +57,32 @@
                                 Modificar informacion
                                 </button>
                            </a>
-                           <a href="{% url 'eliminar' user.username %}" > 
+                           <a> 
                             <br>
-                            <button  type="button" class="btn btn-primary" data-bs-toggle="modal" style="margin-left: 40%;" style="color: red;">
+                            <button  type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar" style="margin-left: 40%;" style="color: red;">
                              Eliminar usuario
                             </button>
                             </a>
+                            <div class="modal" tabindex="-1" id="borrar">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title">¿Está seguro de que desea eliminar el usuario?</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <p>Una vez borrado perdera toda la información</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    </a>
+                                    <a href="{% url 'eliminar' user.username %}" >
+                                      <button type="button" class="btn btn-danger">Borrar</button>
+                                    </a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
 
 
                         </form>
@@ -71,7 +91,7 @@
                 </div>
             </div>
         </div>
-      
+        <!--
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                     <div class="card">
@@ -117,6 +137,6 @@
                 </div>
             </div>
         </div>
+        -->
     </div>
-    <script src="{% static 'validacion.JS' %}"></script><br> <br> <br>
 {% endblock %}
