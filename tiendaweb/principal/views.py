@@ -2,14 +2,19 @@ from django.shortcuts import render,HttpResponse, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.db import IntegrityError
-
-
-def index(request):
-    return render(request , 'index.html')
+from .models import Productos
 
 
 def productos(request):
-    return render(request , 'productos.html')
+    datos = Productos.objects.all()
+    contexto={'Productos': datos}
+    return render(request,'productos.html', contexto)
+
+
+def index(request):
+    datos = Productos.objects.all()
+    contexto={'Productos': datos}
+    return render(request,'index.html', contexto)
 
 def perfil(request):
     usuario = request.user.username
@@ -107,9 +112,6 @@ def modificar(request, username):
                 if correo:
                     user.email = correo
                     user.save()
-                if password1:
-                    user.set_password(password1)
-                    user.save()
                 return redirect('perfil')
             return render(request, 'modificar.html')
     except Exception as error:
@@ -119,3 +121,4 @@ def eliminar_usuario(request, username):
     usuario = get_object_or_404(User, username=username)
     usuario.delete()
     return redirect('inicio')
+
