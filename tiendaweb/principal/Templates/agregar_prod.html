@@ -1,0 +1,57 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block body %}
+<div class="container mt-4" style=>
+    <div class="mb-3 row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center"><b>Modificar Producto</b></h3>
+                </div>
+                <div class="card-body">
+                    <form class="mb-3 row" id="formulario" method="POST">
+                        {% csrf_token %}
+                        <label for="id" class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-form-label">id producto</label>
+                        <div class="col-sm-10 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                            <input type="text" id="id" class="form-control"  placeholder="Ingresa id producto" name="id">
+                        </div>
+                        <label for="nombre" class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-form-label">Nombre</label>
+                        <div class="col-sm-10 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                            <input type="text" id="nombre" class="form-control"  placeholder="Ingresa Nombre" name="nombre">
+                        </div>
+                        <label for="categoria" class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-form-label">Categoria</label>
+                        <div class="col-sm-10 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                            <input type="text" id="categoria" class="form-control"  placeholder="Ingresa Categoria" name="categoria">
+                        </div>
+                    <br>
+                    <br>
+                    <br>
+                    <hr><br>
+                      <div class="row mb-3">
+                        <div class="my-2">
+                            <label for="precio" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="precio"  placeholder="Ingresa precio" name="precio">
+                        </div>
+                        <div class="my-2">
+                          <label for="descripcion" class="form-label">Descripción</label>
+                          <input type="text" class="form-control" id="descripcion"  placeholder="Ingresa descripcion" name="descripcion">
+                        </div>
+                        <div class="text-end">
+                          <button  type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardar">
+                            Agregar Producto
+                        </button>
+                        </div>
+                        {% if mensaje %}
+                            <p style="color: red;"> {{ mensaje }} </p>
+      
+                        {% endif %}
+                        
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock  %}

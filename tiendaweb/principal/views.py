@@ -16,6 +16,7 @@ def index(request):
     contexto={'Productos': datos}
     return render(request,'index.html', contexto)
 
+
 def perfil(request):
     usuario = request.user.username
     nombre = request.user.first_name
@@ -117,8 +118,67 @@ def modificar(request, username):
     except Exception as error:
         print(error)
 
+
 def eliminar_usuario(request, username):
     usuario = get_object_or_404(User, username=username)
     usuario.delete()
     return redirect('inicio')
 
+
+
+def administrar_productos(request):
+    datos = Productos.objects.all()
+    contexto={'Productos': datos}
+    return render(request, 'productos_admin.html', contexto)
+
+
+def modificar_prod(request, id_producto):
+    try:
+        producto = get_object_or_404(Productos, id_producto=id_producto)
+        nombre = request.POST.get('nombre')
+        categoria = request.POST.get('categoria')
+        precio = request.POST.get('precio')
+        descripcion = request.POST.get('descripcion')
+        if request.method == 'POST':
+            if nombre:
+                producto.nombre = nombre
+                producto.save()
+            if categoria:
+                producto.categoria = categoria
+                producto.save()
+            if precio:
+                producto.precio = precio
+                producto.save()
+            if descripcion:
+                producto.descripcion = descripcion
+                producto.save()
+            return redirect('administrar')
+        elif request.method == 'GET':
+            return render(request, 'modificar_prod.html')
+    except Exception as error:
+        print(error)
+
+
+def agregar_productos(request):
+        try:
+        if request.method == "POST":
+            id_prod = request.POST.get('id')
+            nombre = request.POST.get('nombre')
+            categoria = request.POST.get('categoria')
+            precio = request.POST.get('precio')
+            descripcion = request.POST.get('descripcion')
+            if id_prod=="" or nombre=="" or categoria=="" or precio=="" or descripcion=="": 
+                return render(request, 'agregar_prod.html', {'mensaje': 'Los campos no deben estar vacios'})
+            else:
+                    producto = Productos.objects.create_user(nombre=nombre, categoria=categoria, id_producto=id_prod, precio=precio, descripcion=descripcion)
+                    producto.save()
+                    return render(request, 'productos_admin.html', {'mensaje': 'Producto creado correctamente'})
+        elif request.method=='GET':
+            return render(request, 'registro.html')
+
+    except IntegrityError:
+        return render(request,'registro.html',{'mensaje':'Producto ya existe'})
+    except ValueError:
+        return render(request,'registro.html',{'mensaje':'Dato no válido'})
+    except Exception as error:
+        print(error)
