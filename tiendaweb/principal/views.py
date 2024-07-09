@@ -139,6 +139,7 @@ def modificar_prod(request, id_producto):
         categoria = request.POST.get('categoria')
         precio = request.POST.get('precio')
         descripcion = request.POST.get('descripcion')
+        imagen  = request.FILES.get('imagen')
         if request.method == 'POST':
             if nombre:
                 producto.nombre = nombre
@@ -152,6 +153,9 @@ def modificar_prod(request, id_producto):
             if descripcion:
                 producto.descripcion = descripcion
                 producto.save()
+            if imagen:
+                producto.imagen = imagen
+                producto.save()
             return redirect('administrar')
         elif request.method == 'GET':
             return render(request, 'modificar_prod.html')
@@ -159,26 +163,45 @@ def modificar_prod(request, id_producto):
         print(error)
 
 
-def agregar_productos(request):
-        try:
-        if request.method == "POST":
-            id_prod = request.POST.get('id')
-            nombre = request.POST.get('nombre')
-            categoria = request.POST.get('categoria')
-            precio = request.POST.get('precio')
-            descripcion = request.POST.get('descripcion')
-            if id_prod=="" or nombre=="" or categoria=="" or precio=="" or descripcion=="": 
-                return render(request, 'agregar_prod.html', {'mensaje': 'Los campos no deben estar vacios'})
-            else:
-                    producto = Productos.objects.create_user(nombre=nombre, categoria=categoria, id_producto=id_prod, precio=precio, descripcion=descripcion)
-                    producto.save()
-                    return render(request, 'productos_admin.html', {'mensaje': 'Producto creado correctamente'})
-        elif request.method=='GET':
-            return render(request, 'registro.html')
 
-    except IntegrityError:
-        return render(request,'registro.html',{'mensaje':'Producto ya existe'})
-    except ValueError:
-        return render(request,'registro.html',{'mensaje':'Dato no válido'})
-    except Exception as error:
-        print(error)
+def agregar_productos(request):
+    if request.method == "POST":
+        try:
+                id_prod = request.POST.get('id')
+                nombre = request.POST.get('nombre')
+                categoria = request.POST.get('categoria')
+                precio = request.POST.get('precio')
+                descripcion = request.POST.get('descripcion')
+                imagen  = request.FILES.get('imagen')
+                if id_prod=="" or nombre=="" or categoria=="" or precio=="" or descripcion=="" or imagen is None: 
+                    return render(request, 'agregar_prod.html', {'mensaje': 'Los campos no deben estar vacios'})
+                else:
+                        producto = Productos.objects.create(nombre=nombre, categoria=categoria, id_producto=id_prod, precio=precio, descripcion=descripcion, imagen=imagen)
+                        producto.save()
+                        return redirect('administrar')
+
+        except IntegrityError:
+            return render(request,'agregar_prod.html',{'mensaje':'Producto ya existe'})
+        except ValueError:
+            return render(request,'agregar_prod.html',{'mensaje':'Dato no válido'})
+        except Exception as error:
+            print(error)
+    
+    elif request.method=='GET':
+            return render(request, 'agregar_prod.html')
+        
+def eliminar_prod(request, id_producto):
+    producto = get_object_or_404(Productos, id_producto=id_producto)
+    producto.delete()
+    return redirect('administrar')
+
+def producto_vision(request, producto_id):
+    producto = get_object_or_404(Productos, pk=producto_id)
+    return render(request, 'modificar_prod.html', {
+        'id_producto': producto.id_producto,
+        'nombre': producto.nombre,
+        'categoria': producto.categoria,
+        'precio': producto.precio,
+        'descripcion': producto.descripcion,
+        'imagen': producto.imagen
+    })

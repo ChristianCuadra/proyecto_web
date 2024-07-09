@@ -6,10 +6,10 @@
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-center"><b>Modificar Producto</b></h3>
+                    <h3 class="text-center"><b>Agregar Producto</b></h3>
                 </div>
                 <div class="card-body">
-                    <form class="mb-3 row" id="formulario" method="POST">
+                    <form class="mb-3 row" id="formulario" method="POST" enctype='multipart/form-data'>
                         {% csrf_token %}
                         <label for="id" class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-form-label">id producto</label>
                         <div class="col-sm-10 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
@@ -30,11 +30,15 @@
                       <div class="row mb-3">
                         <div class="my-2">
                             <label for="precio" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="precio"  placeholder="Ingresa precio" name="precio">
+                            <input type="number" class="form-control" id="precio"  placeholder="Ingresa precio" name="precio" minlength=3 maxlength=10>
                         </div>
                         <div class="my-2">
                           <label for="descripcion" class="form-label">Descripción</label>
                           <input type="text" class="form-control" id="descripcion"  placeholder="Ingresa descripcion" name="descripcion">
+                        </div>
+                        <div class="my-2">
+                            <label for="imagen" class="form-label">Imagen</label>
+                            <input type="file" class="form-control" id="imagen"  placeholder="Ingresa imagen" name="imagen">
                         </div>
                         <div class="text-end">
                           <button  type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardar">

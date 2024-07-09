@@ -63,26 +63,28 @@
       <div
         class="cuadrado-vista-producto h-100 w-100 mt-3"
         style="text-align: center"
-      >
-        <h1>PRODUCTOS DESTACADOS:</h1>
+      >{% if user.is_authenticated %}
+        <h1>PRODUCTOS DESTACADOS PARA : {{user.username}}</h1>
+        {% else%}
+        <h1>PRODUCTOS DESTACADOS</h1>
+        {% endif %}
+
       </div>
-      <div id="productosIndex" class="container-fluid" style="width: 90%">
-        <div
-          class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-3"
-        >
+      <div id="productosIndex" class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-3">
+          {% for producto in Productos%}
           <div class="col">
             <div id="cards_mas_pequennias">
               <div class="card h-100">
                 <div id="img_cards">
                   <a href="{% url 'vista_productos' %}">
                     <img
-                    src="{% static 'fotos/img_default_productos.jpg' %}"
-                      class="card-img-top"
+                    src="{{producto.imagen.url}}"
+                    class="card-img-top"
                       alt="producto"
                     />
                   </a>
                 </div>
-                {% for producto in Productos%}
                   <div class="card-body">
                     <h5 class="card-title">{{ producto.nombre }}</h5>
                     <p class="card-text">
@@ -102,262 +104,10 @@
                       </button>
                     </a>
                   </div>
-                {%endfor%}
               </div>
             </div>
           </div>
-          <div class="col">
-            <div id="cards_mas_pequennias">
-              <div class="card h-100">
-                <div id="img_cards">
-                  <a href="{% url 'vista_productos' %}">
-                    <img
-                    src="{% static 'fotos/img_default_productos.jpg' %}"
-                      class="card-img-top"
-                      alt="producto"
-                    />
-                  </a>
-                </div>
-                {% for producto in Productos%}
-                  <div class="card-body">
-                    <h5 class="card-title">{{ producto.nombre }}</h5>
-                    <p class="card-text">
-                      {{ producto.descripcion }}
-                    </p>
-                  </div>
-                  <div class="card-footer" style="text-align: center">
-                    <p style="font-weight: bold">PRECIO: ${{ producto.precio }}</p>
-                    <hr />
-                    <a href="{% url 'carrito' %}">
-                      <button
-                        type="button"
-                        class="btn btn-dark"
-                        style="margin-bottom: 5px"
-                      >
-                        AÑADIR AL CARRITO
-                      </button>
-                    </a>
-                  </div>
-                {%endfor%}
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div id="cards_mas_pequennias">
-              <div class="card h-100">
-                <div id="img_cards">
-                  <a href="{% url 'vista_productos' %}">
-                    <img
-                    src="{% static 'fotos/img_default_productos.jpg' %}"                      
-                      class="card-img-top"
-                      alt="producto"
-                    />
-                  </a>
-                </div>
-                {% for producto in Productos%}
-                  <div class="card-body">
-                    <h5 class="card-title">{{ producto.nombre }}</h5>
-                    <p class="card-text">
-                      {{ producto.descripcion }}
-                    </p>
-                  </div>
-                  <div class="card-footer" style="text-align: center">
-                    <p style="font-weight: bold">PRECIO: ${{ producto.precio }}</p>
-                    <hr />
-                    <a href="{% url 'carrito' %}">
-                      <button
-                        type="button"
-                        class="btn btn-dark"
-                        style="margin-bottom: 5px"
-                      >
-                        AÑADIR AL CARRITO
-                      </button>
-                    </a>
-                  </div>
-                {%endfor%}
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div id="cards_mas_pequennias">
-              <div class="card h-100">
-                <div id="img_cards">
-                  <a href="{% url 'vista_productos' %}">
-                    <img
-                    src="{% static 'fotos/img_default_productos.jpg' %}"
-                      class="card-img-top"
-                      alt="producto"
-                    />
-                  </a>
-                </div>
-                {% for producto in Productos%}
-                  <div class="card-body">
-                    <h5 class="card-title">{{ producto.nombre }}</h5>
-                    <p class="card-text">
-                      {{ producto.descripcion }}
-                    </p>
-                  </div>
-                  <div class="card-footer" style="text-align: center">
-                    <p style="font-weight: bold">PRECIO: ${{ producto.precio }}</p>
-                    <hr />
-                    <a href="{% url 'carrito' %}">
-                      <button
-                        type="button"
-                        class="btn btn-dark"
-                        style="margin-bottom: 5px"
-                      >
-                        AÑADIR AL CARRITO
-                      </button>
-                    </a>
-                  </div>
-                {%endfor%}
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div id="cards_mas_pequennias">
-              <div class="card h-100">
-                <div id="img_cards">
-                  <a href="{% url 'vista_productos' %}">
-                    <img
-                    src="{% static 'fotos/img_default_productos.jpg' %}"
-                      class="card-img-top"
-                      alt="producto"
-                    />
-                  </a>
-                </div>
-                {% for producto in Productos%}
-                <div class="card-body">
-                  <h5 class="card-title">{{ producto.nombre }}</h5>
-                  <p class="card-text">
-                    {{ producto.descripcion }}
-                  </p>
-                </div>
-                <div class="card-footer" style="text-align: center">
-                  <p style="font-weight: bold">PRECIO: ${{ producto.precio }}</p>
-                  <hr />
-                  <a href="{% url 'carrito' %}">
-                    <button
-                      type="button"
-                      class="btn btn-dark"
-                      style="margin-bottom: 5px"
-                    >
-                      AÑADIR AL CARRITO
-                    </button>
-                  </a>
-                </div>
-              {%endfor%}
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div id="cards_mas_pequennias">
-              <div class="card h-100">
-                <div id="img_cards">
-                  <a href="{% url 'vista_productos' %}">
-                    <img
-                    src="{% static 'fotos/img_default_productos.jpg' %}"
-                      class="card-img-top"
-                      alt="producto"
-                    />
-                  </a>
-                </div>
-                {% for producto in Productos%}
-                  <div class="card-body">
-                    <h5 class="card-title">{{ producto.nombre }}</h5>
-                    <p class="card-text">
-                      {{ producto.descripcion }}
-                    </p>
-                  </div>
-                  <div class="card-footer" style="text-align: center">
-                    <p style="font-weight: bold">PRECIO: ${{ producto.precio }}</p>
-                    <hr />
-                    <a href="{% url 'carrito' %}">
-                      <button
-                        type="button"
-                        class="btn btn-dark"
-                        style="margin-bottom: 5px"
-                      >
-                        AÑADIR AL CARRITO
-                      </button>
-                    </a>
-                  </div>
-                {%endfor%}
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div id="cards_mas_pequennias">
-              <div class="card h-100">
-                <div id="img_cards">
-                  <a href="{% url 'vista_productos' %}">
-                    <img
-                    src="{% static 'fotos/img_default_productos.jpg' %}"
-                      class="card-img-top"
-                      alt="producto"
-                    />
-                  </a>
-                </div>
-                {% for producto in Productos%}
-                  <div class="card-body">
-                    <h5 class="card-title">{{ producto.nombre }}</h5>
-                    <p class="card-text">
-                      {{ producto.descripcion }}
-                    </p>
-                  </div>
-                  <div class="card-footer" style="text-align: center">
-                    <p style="font-weight: bold">PRECIO: ${{ producto.precio }}</p>
-                    <hr />
-                    <a href="{% url 'carrito' %}">
-                      <button
-                        type="button"
-                        class="btn btn-dark"
-                        style="margin-bottom: 5px"
-                      >
-                        AÑADIR AL CARRITO
-                      </button>
-                    </a>
-                  </div>
-                {%endfor%}
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div id="cards_mas_pequennias">
-              <div class="card h-100">
-                <div id="img_cards">
-                  <a href="{% url 'vista_productos' %}">
-                    <img
-                    src="{% static 'fotos/img_default_productos.jpg' %}"
-                      class="card-img-top"
-                      alt="producto"
-                    />
-                  </a>
-                </div>
-                {% for producto in Productos%}
-                  <div class="card-body">
-                    <h5 class="card-title">{{ producto.nombre }}</h5>
-                    <p class="card-text">
-                      {{ producto.descripcion }}
-                    </p>
-                  </div>
-                  <div class="card-footer" style="text-align: center">
-                    <p style="font-weight: bold">PRECIO: ${{ producto.precio }}</p>
-                    <hr />
-                    <a href="{% url 'carrito' %}">
-                      <button
-                        type="button"
-                        class="btn btn-dark"
-                        style="margin-bottom: 5px"
-                      >
-                        AÑADIR AL CARRITO
-                      </button>
-                    </a>
-                  </div>
-                {%endfor%}
-              </div>
-            </div>
-          </div>
+          {%endfor%}
         </div>
       </div>
     </div>

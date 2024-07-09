@@ -6,6 +6,7 @@ class Productos(models.Model):
     categoria     = models.CharField(max_length=60)
     precio        = models.IntegerField()
     descripcion   = models.CharField(max_length=500, null=False, default='')
-
+    imagen        = models.ImageField(upload_to='producto')
+    
     def __str__(self):
         return str(self.nombre)+" "+str(self.precio)   
