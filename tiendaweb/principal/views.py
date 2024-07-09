@@ -2,6 +2,7 @@ from django.shortcuts import render,HttpResponse, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.db import IntegrityError
+from django.db.models import Q
 from .models import Productos
 
 
@@ -195,13 +196,23 @@ def eliminar_prod(request, id_producto):
     producto.delete()
     return redirect('administrar')
 
-def producto_vision(request, producto_id):
-    producto = get_object_or_404(Productos, pk=producto_id)
-    return render(request, 'modificar_prod.html', {
-        'id_producto': producto.id_producto,
-        'nombre': producto.nombre,
-        'categoria': producto.categoria,
-        'precio': producto.precio,
-        'descripcion': producto.descripcion,
-        'imagen': producto.imagen
-    })
+def producto_vision(request, id_producto):
+    producto = get_object_or_404(Productos, id_producto=id_producto)
+    return render(request, 'vista_producto.html', {'producto': producto})
+
+
+#def listar_productos(request):
+    #busqueda = request.GET.get('buscar')
+    #producto = Productos.objects.all()
+    #contexto={'Productos': producto}
+    
+    #if busqueda:
+     #   producto = Productos.objects.filter(
+      #      Q(nombre__icontains = busqueda ) |
+       #     Q(categoria__icontains = busqueda) |
+        #    Q(precio__icontains = busqueda)
+        #).distinct()
+    #else:
+     #   producto = Productos.objects.all()
+    
+    #return render (request, 'navbar.html', contexto)

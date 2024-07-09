@@ -5,7 +5,7 @@ class Productos(models.Model):
     nombre        = models.CharField(max_length=60) 
     categoria     = models.CharField(max_length=60)
     precio        = models.IntegerField()
-    descripcion   = models.CharField(max_length=500, null=False, default='')
+    descripcion   = models.CharField(max_length=1000, null=False, default='')
     imagen        = models.ImageField(upload_to='producto')
     
     def __str__(self):

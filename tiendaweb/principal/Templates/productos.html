@@ -10,7 +10,7 @@
           <div id="cards_mas_pequennias">
             <div class="card h-100">
               <div id="img_cards">
-                <a href="{% url 'vista_productos' %}">
+                <a href="{% url 'prodvis' producto.id_producto %}">
                   <img
                   src="{{producto.imagen.url}}"
                     class="card-img-top"
@@ -20,7 +20,7 @@
               </div>
                 <div class="card-body">
                   <h5 class="card-title">{{ producto.nombre }}</h5>
-                  <p class="card-text">
+                  <p class="card-text descripcion">
                     {{ producto.descripcion }}
                   </p>
                 </div>

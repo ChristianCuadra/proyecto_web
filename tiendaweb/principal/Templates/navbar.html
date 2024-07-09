@@ -106,12 +106,13 @@
                 >
               </li>
             </ul>
-            <form class="d-flex" role="search" style="margin-right: 30%">
+            <form class="d-flex" role="search" style="margin-right: 30%" method='GET' value='{{request.GET.buscar}}'>
               <input
                 class="form-control me-2"
                 type="search"
                 placeholder="Buscar producto..."
                 aria-label="Search"
+                name='buscar'
               />
               <button class="btn btn-outline-success" type="submit">
                 Buscar
