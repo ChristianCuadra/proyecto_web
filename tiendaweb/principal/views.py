@@ -200,33 +200,37 @@ def producto_vision(request, id_producto):
     return render(request, 'vista_producto.html', {'producto': producto})
 
 
-#def listar_productos(request):
-    #busqueda = request.GET.get('buscar')
-    #producto = Productos.objects.all()
-    #contexto={'Productos': producto}
-    
-    #if busqueda:
-     #   producto = Productos.objects.filter(
-      #      Q(nombre__icontains = busqueda ) |
-       #     Q(categoria__icontains = busqueda) |
-        #    Q(precio__icontains = busqueda)
-        #).distinct()
-    #else:
-     #   producto = Productos.objects.all()
-    
-    #return render (request, 'navbar.html', contexto)
+def listar_productos(request):
+    busqueda = request.GET.get('buscar')
+    productos = Productos.objects.all()
+        
+    if busqueda:
+        productos = Productos.objects.filter(
+            Q(nombre__icontains = busqueda ) |
+            Q(categoria__icontains = busqueda) |
+            Q(precio__icontains = busqueda)
+        ).distinct()
+    else:
+        productos = Productos.objects.all()
+     
+    contexto={'Productos': productos, 'busqueda':busqueda}
+
+    return render (request, 'productos.html', contexto)
+
+
     
     
 def agregar_carrito(request, id_producto):
     producto = get_object_or_404(Productos, id_producto=id_producto)
     carrito, created = Carrito.objects.get_or_create(usuario=request.user)
-    carrito_item, created = CarritoItem.objects.get_or_create(carrito=carrito, producto=producto)
     
-    if not created:
+    try:
+        carrito_item = CarritoItem.objects.get(carrito=carrito, producto=producto)
         carrito_item.cantidad += 1
-        return redirect('mostrar_carrito')
-    
-    carrito_item.save()
+        carrito_item.save()
+    except CarritoItem.DoesNotExist:
+        # Si no existe, crea uno nuevo con cantidad inicial 1
+        carrito_item = CarritoItem.objects.create(carrito=carrito, producto=producto, cantidad=1)
     
     return redirect('mostrar_carrito')
 
@@ -290,11 +294,30 @@ def mostrar_pedido(request):
                    'correo':correo})
 
 
-def borrar_carrito(request):
-    carrito = Carrito.objects.get(usuario=request.user)
-    CarritoItem.objects.filter(carrito=carrito).delete()
-    
-    return render (request, 'boleta.html')
+def boleta(request):
+    try:
+        carrito = Carrito.objects.get(usuario=request.user)
+        carrito_item = CarritoItem.objects.filter(carrito=carrito)
+        total_carrito = sum(item.producto.precio * item.cantidad for item in carrito_item)
+        informacion = get_object_or_404(InformacionUsuario, usuario=request.user)
+        usuario = get_object_or_404(User, username=request.user.username)
+        tarjeta = informacion.nro_tarjeta
+        direccion = informacion.direccion
+        correo = usuario.email
+        
+        return render(request, 'boleta.html', 
+                    {'carrito_item':carrito_item, 
+                    'total_carrito':total_carrito, 
+                    'tarjeta':tarjeta, 
+                    'direccion':direccion, 
+                    'correo':correo})
+        
+    except Exception as e:
+        print(e)
+    finally:
+        if 'carrito' in locals():
+            CarritoItem.objects.filter(carrito=carrito).delete()
+            
 
 def comprar_producto(request, id_producto):
     producto = get_object_or_404(Productos, id_producto=id_producto)

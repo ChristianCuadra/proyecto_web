@@ -1,9 +1,11 @@
-body{
+body, html{
     background-image: url(fotos/img_fondo.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     margin-top: 0;
     margin: unset;
+
+    
 }
 
 #cards_mas_pequennias .card {
@@ -73,8 +75,8 @@ body{
 }
 
 .card_prod img{
-    width: 100%;
-    height: 210px;
+    width: 90%;
+    height: 200px;
 
 }
 
@@ -249,6 +251,14 @@ padding-top: 10px;
 #gallery {
     display: flex;
     flex-wrap: wrap;
+}
+
+.footer {
+    height: 50px; /* Ajusta la altura del footer */
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
 }
 
 #gallery img {

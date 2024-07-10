@@ -102,23 +102,24 @@
                   class="nav-link active"
                   aria-current="page"
                   href="{% url 'productos' %}"
-                  >Productos</a
-                >
+                  >Productos
+                </a>
               </li>
             </ul>
-            <form class="d-flex" role="search" style="margin-right: 30%" method='GET' value='{{request.GET.buscar}}'>
+            <form class="d-flex" role="search" style="margin-right: 30%" method='GET' value='{{request.GET.buscar}}', action="{% url 'listar_prod' %}">
               <input
                 class="form-control me-2"
                 type="search"
                 placeholder="Buscar producto..."
                 aria-label="Search"
                 name='buscar'
+                value={{busqueda}}
               />
               <button class="btn btn-outline-success" type="submit">
                 Buscar
               </button>
             </form>
-          <ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
               <a
                 class="nav-link active dropdown-toggle"
