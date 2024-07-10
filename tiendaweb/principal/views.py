@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.db import IntegrityError
 from django.db.models import Q
-from .models import Productos
+from .models import Productos, Carrito, CarritoItem, InformacionUsuario
+from django.http import JsonResponse
 
 
 def productos(request):
@@ -27,10 +28,6 @@ def perfil(request):
 
 def vista_producto(request):
     return render(request , 'vista_producto.html')
-
-def carrito(request):
-    return render(request , 'carrito.html')
-
 
 
 def registro(request):
@@ -116,6 +113,8 @@ def modificar(request, username):
                     user.save()
                 return redirect('perfil')
             return render(request, 'modificar.html')
+    except IntegrityError:
+        return render(request, 'modificar.html',{'mensaje':'Nombre de usuario ya existe'})
     except Exception as error:
         print(error)
 
@@ -216,3 +215,97 @@ def producto_vision(request, id_producto):
      #   producto = Productos.objects.all()
     
     #return render (request, 'navbar.html', contexto)
+    
+    
+def agregar_carrito(request, id_producto):
+    producto = get_object_or_404(Productos, id_producto=id_producto)
+    carrito, created = Carrito.objects.get_or_create(usuario=request.user)
+    carrito_item, created = CarritoItem.objects.get_or_create(carrito=carrito, producto=producto)
+    
+    if not created:
+        carrito_item.cantidad += 1
+        return redirect('mostrar_carrito')
+    
+    carrito_item.save()
+    
+    return redirect('mostrar_carrito')
+
+def mostrar_carrito(request):
+    carrito = Carrito.objects.get(usuario=request.user)
+    carrito_item = CarritoItem.objects.filter(carrito=carrito)
+    total_carrito = sum(item.producto.precio * item.cantidad for item in carrito_item)
+    
+    return render(request, 'carrito.html', {'carrito_item':carrito_item, 'total_carrito':total_carrito})
+
+def eliminar_item(request, id):
+    carrito_item= get_object_or_404(CarritoItem, id=id)
+    carrito_item.delete()
+    return redirect('mostrar_carrito')
+
+def informacion_pago(request):
+        try:
+            
+            informacion = InformacionUsuario.objects.get(usuario=request.user)
+            return redirect('mostrar_pedido')
+        
+        except InformacionUsuario.DoesNotExist:
+            if request.method == "POST":
+                usuario = request.user
+                tarjeta = request.POST.get('tarjeta')
+                mes = request.POST.get('mes')
+                anno = request.POST.get('año')
+                codigo = request.POST.get('codigo')
+                direccion = request.POST.get('direccion')
+                if tarjeta=="" or mes=="" or anno=="" or codigo=="" or  direccion =="" : 
+                    return render(request, 'pago.html', {'mensaje': 'Los campos no deben estar vacios'})
+                else:
+                        informacion = InformacionUsuario.objects.create(usuario= usuario, nro_tarjeta=tarjeta, codigo_seg=codigo, fecha_venc_mes=mes, fecha_venc_anno=anno, direccion=direccion)
+                        informacion .save()
+                        return redirect('mostrar_pedido')
+            elif request.method=='GET':
+                return render(request, 'pago.html')
+
+        except IntegrityError:
+            return render(request,'pago.html',{'mensaje':'Información ya agregada'})
+        except ValueError:
+            return render(request,'pago.html',{'mensaje':'Dato no válido'})
+        except Exception as error:
+            print(error)
+
+
+def mostrar_pedido(request):
+    informacion = get_object_or_404(InformacionUsuario, usuario=request.user)
+    usuario = get_object_or_404(User, username=request.user.username)
+    carrito = Carrito.objects.get(usuario=request.user)
+    carrito_item = CarritoItem.objects.filter(carrito=carrito)
+    total_carrito = sum(item.producto.precio * item.cantidad for item in carrito_item)
+    tarjeta = informacion.nro_tarjeta
+    direccion = informacion.direccion
+    correo = usuario.email
+    return render(request, 'info_pedido.html', 
+                  {'carrito_item':carrito_item, 
+                   'total_carrito':total_carrito, 
+                   'tarjeta':tarjeta, 
+                   'direccion':direccion, 
+                   'correo':correo})
+
+
+def borrar_carrito(request):
+    carrito = Carrito.objects.get(usuario=request.user)
+    CarritoItem.objects.filter(carrito=carrito).delete()
+    
+    return render (request, 'boleta.html')
+
+def comprar_producto(request, id_producto):
+    producto = get_object_or_404(Productos, id_producto=id_producto)
+    usuario = request.user
+
+    carrito, created = Carrito.objects.get_or_create(usuario=usuario)
+    carrito_item, created = CarritoItem.objects.get_or_create(carrito=carrito, producto=producto)
+    
+    if not created:
+        carrito_item.cantidad += 1
+        carrito_item.save()
+
+
+    return redirect('informacion_pago')

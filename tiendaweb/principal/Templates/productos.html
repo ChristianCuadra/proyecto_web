@@ -1,5 +1,6 @@
 {% extends 'navbar.html' %}
 {% load static %}
+{% load humanize %}
 {% block body %}
 
     <div class="Titulo_prod"><h1 style="text-align: center">PRODUCTOS</h1></div>
@@ -25,12 +26,12 @@
                   </p>
                 </div>
                 <div class="card-footer" style="text-align: center">
-                  <p style="font-weight: bold">PRECIO: ${{ producto.precio }}</p>
+                  <p style="font-weight: bold">PRECIO: ${{ producto.precio|intcomma }}</p>
                   <hr />
-                  <a href="{% url 'carrito' %}">
+                  <a href="{% url 'agregar_carrito' producto.id_producto %}">
                     <button
                       type="button"
-                      class="btn btn-dark"
+                      class="btn btn-success"
                       style="margin-bottom: 5px"
                     >
                       AÑADIR AL CARRITO

@@ -23,19 +23,11 @@
                         <form class="mb-3 row" id="formulario">
                             <label for="nombre1" class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-form-label">Nombre:</label>
                             <div class="col-sm-10 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                {% if user.is_authenticated %}
                                 <div class="border border-black p-2 mb-2">{{user.first_name}}</div>
-                                {% else %}
-                                <h3 class="text-center"></h3>
-                                {% endif %}
                             </div>
                             <label for="apellido1" class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-form-label">Apellidos:</label>
                             <div class="col-sm-10 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                                {% if user.is_authenticated %}
                                 <div class="border border-black p-2 mb-2" style="left: 30px;">{{user.last_name}}</div>
-                                {% else %}
-                                <h3 class="text-center"></h3>
-                                {% endif %}
                             </div>
                         <br>
                         <br>
@@ -44,11 +36,7 @@
                           <div class="row mb-3">
                             <div class="my-2">
                               <label for="email1" class="form-label">Email:</label>
-                                {% if user.is_authenticated %}
                                 <div class="border border-black p-2 mb-2">{{user.email}}</div>
-                                {% else %}
-                                <h3 class="text-center"></h3>
-                                {% endif %}
                             </div>
                             
                             <div>

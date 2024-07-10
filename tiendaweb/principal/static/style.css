@@ -7,7 +7,7 @@ body{
 }
 
 #cards_mas_pequennias .card {
-    height: 100%; /* Permite que la card ocupe toda la altura del contenedor */
+    height: 100%; 
     display: flex;
     flex-direction: column;
 }
@@ -15,18 +15,18 @@ body{
 #cards_mas_pequennias .descripcion {
     flex-grow: 1;
     overflow: hidden;
-    text-overflow: ellipsis; /* Muestra puntos suspensivos si el texto es demasiado largo */
-    white-space: nowrap; /* Evita el salto de línea */
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
 }
 
 #cards_mas_pequennias .card-footer {
-    flex-shrink: 0; /* El pie de página no se encogerá */
+    flex-shrink: 0; 
     text-align: center;
 }
 
 #cards_mas_pequennias .card-title {
-    flex-shrink: 0; /* El título no se encogerá */
-    text-overflow: ellipsis; /* Muestra puntos suspensivos si el texto es demasiado largo */
+    flex-shrink: 0; 
+    text-overflow: ellipsis; 
     white-space: nowrap;
     flex-grow: 1;
     overflow: hidden;

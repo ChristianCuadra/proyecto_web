@@ -1,5 +1,6 @@
 {% extends 'navbar.html' %}
 {% load static %}
+{% load humanize %}
 {% block body %}
     <div class="DivPadre">
       <div class="container-vista-producto">
@@ -37,13 +38,13 @@
                     class="col 12 cuadrado-vista-producto"
                     style="height: 20%; width: 100%"
                   >
-                    <p style="font-weight: bolder">PRECIO: ${{producto.precio}}</p>
+                    <p style="font-weight: bolder">PRECIO: ${{producto.precio|intcomma}}</p>
                   </div>
                   {% if user.is_superuser %}
                   
                   {% else %}
                     <div class="col-12">
-                      <a href="#">
+                      <a href="{% url 'comprar_producto' producto.id_producto%}">
                         <button
                           class="btn btn-primary"
                           type="button"
@@ -54,10 +55,10 @@
                       </a>
                     </div>
                     <div class="col-12">
-                      <a href="{% url 'carrito' %}">
+                      <a href="{% url 'agregar_carrito' producto.id_producto%}">
                         <button
                           type="button"
-                          class="btn btn-dark"
+                          class="btn btn-success"
                           style="margin-bottom: 5px"
                         >
                           AÑADIR AL CARRITO

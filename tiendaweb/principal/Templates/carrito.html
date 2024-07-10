@@ -1,6 +1,7 @@
 {% extends 'navbar.html' %}
 {% load static %}
 {% block body %}
+{% load humanize %}
 
   <div class="DivPadre">
     <div class="container-vista-producto">
@@ -8,70 +9,55 @@
         <div id="containerPadreCarrito" class="container card">
          
               <div id="containerProductosCarrito"class=" container">
-                <div class="card" id="card1">
-                  <hr>
-                  <div class="row g-0">
-                    <div class="col-md-4">
-                      <img src="{% static 'fotos/img_default_productos.jpg' %}" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-6">
-                      <div class="card-body">
-                        <h5 class="card-title" style="text-align: left;">Hp laptop</h5>
-                        <p class="card-text" style="text-align: left;">$299.000</p>
+                {% for item in carrito_item %}
+                  <div class="card" id="card3">
+                    <hr>
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <a href="{% url 'prodvis' item.producto.id_producto %}">
+                          <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}" class="img-fluid rounded-start" >
+                        </a>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card-body">
+                          <h5 class="card-title" style="text-align: left;">{{ item.producto.nombre }}</h5>
+                          <p class="card-text" style="text-align: left;">${{ item.producto.precio|intcomma }}</p>
+                          <p class="card-text" style="text-align: left;">Cantidad: x{{ item.cantidad }}</p>
+                        </div>
+                      </div>
+                      <div class="col-md-2 quitarProducto">
+                        <a href="{% url 'eliminar_item' item.id %}">
+                        <button id="borrar3" type="submit" class="btn btn-danger">X</button>
+                        </a>
                       </div>
                     </div>
-                    <div class="col-md-2 quitarProducto">
-                      <button id="borrar1">X</button>
-                    </div>
+                    <hr>
                   </div>
-                  <hr>
-                </div>
-                <div class="card" id="card2">
-                  <hr>
-                  <div class="row g-0">
-                    <div class="col-md-4">
-                      <img src="{% static 'fotos/img_default_productos.jpg' %}" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-6">
-                      <div class="card-body">
-                        <h5 class="card-title" style="text-align: left;">Hp laptop</h5>
-                        <p class="card-text" style="text-align: left;">$299.000</p>
-                      </div>
-                    </div>
-                    <div class="col-md-2 quitarProducto">
-                      <button id="borrar2">X</button>
-                    </div>
-                  </div>
-                  <hr>
-                </div>
-                <div class="card" id="card3">
-                  <hr>
-                  <div class="row g-0">
-                    <div class="col-md-4">
-                      <img src="{% static 'fotos/img_default_productos.jpg' %}" class="img-fluid rounded-start" alt="PC HP">
-                    </div>
-                    <div class="col-md-6">
-                      <div class="card-body">
-                        <h5 class="card-title" style="text-align: left;">Hp laptop</h5>
-                        <p class="card-text" style="text-align: left;">$299.000</p>
-                      </div>
-                    </div>
-                    <div class="col-md-2 quitarProducto">
-                      <button id="borrar3">X</button>
-                    </div>
-                  </div>
-                  <hr>
-                </div>
+                {% endfor %}
               </div>
 
           <div id="cardFooter" class="container card-footer">
 
-
-          <div class="btn btn-primary cuadrado-subtotal" style="font-weight: bolder;width: 100%">Total: $897.000</div>
+          {% if total_carrito == 0%}
+            <div class="btn btn-primary cuadrado-subtotal" style="font-weight: bolder;width: 100%">El carrito se encuentra vacío</div>
+          {% else %}
+            <div class="btn btn-primary cuadrado-subtotal" style="font-weight: bolder;width: 100%">Total: ${{total_carrito|intcomma }}</div>
+          {% endif %}
           <br></br>
-          
-          <button class="btn btn-primary cuadrado-checkout" style="font-weight: bolder;width: 100%">Comprar</button>
-
+          {% if total_carrito == 0%}
+            <a>
+              <button class="btn btn-primary cuadrado-checkout" style="font-weight: bolder;width: 100%" disabled>Comprar</button>
+            </a>
+          {% else %}
+            <a href="{% url 'informacion_pago'  %}">
+              <button class="btn btn-primary cuadrado-checkout" style="font-weight: bolder;width: 100%" >Comprar</button>
+            </a>
+            <br>
+            <br>
+            <a href="{% url 'inicio'  %}">
+              <button class="btn btn-info " style="font-weight: bolder;width: 100%" >Seguir comprando</button>
+            </a>
+          {% endif %}
           </div>
         </div>
       </div>

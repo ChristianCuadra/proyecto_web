@@ -1,0 +1,54 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container mt-4" style=>
+    <div class="mb-3 row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center"><b>Agregar Información de pago</b></h3>
+                </div>
+                <div class="card-body">
+                    <form class="mb-3 row" id="formulario" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                    <hr><br>
+                      <div class="row mb-3">
+                        <div class="my-2">
+                            <label for="tarjeta" class="form-label">NRO TARJETA</label>
+                            <input type="number" class="form-control" id="tarjeta"  placeholder="Ingresa numero de tarjeta" name="tarjeta" >
+                        </div>
+                        <div class="my-2">
+                          <label for="mes" class="form-label">MES</label>
+                          <input type="number" class="form-control" id="mes"  placeholder="Ingresa mes de caducación" name="mes" maxlength=2>
+                        </div>
+                        <div class="my-2">
+                            <label for="año" class="form-label">AÑO</label>
+                            <input type="number" class="form-control" id="año"  placeholder="Ingresa año de caducación" name="año">
+                        </div>
+                        <div class="my-2">
+                            <label for="codigo" class="form-label">CODIGO DE SEGURIDAD</label>
+                            <input type="number" class="form-control" id="codigo"  placeholder="Ingresa codigo de seguridad" name="codigo">
+                        </div>
+                        <div class="my-2">
+                            <label for="direccion" class="form-label">DIRECCIÓN</label>
+                            <input type="text" class="form-control" id="direccion"  placeholder="Ingresa dirección de despacho" name="direccion">
+                        </div>
+                        <div class="text-end">
+                          <button  type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardar">
+                            Agregar Información
+                        </button>
+                        </div>
+                        {% if mensaje %}
+                            <p style="color: red;"> {{ mensaje }} </p>
+      
+                        {% endif %}
+                        
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

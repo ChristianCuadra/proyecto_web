@@ -1,0 +1,45 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% load humanize %}
+{% block body %}
+
+<div class="card" style="width: 40rem;">
+    <div class="card-header d-flex justify-content-center">
+        <h3>INFORMACIÓN DE COMPRA</h3>
+    </div>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <span style="display: inline-block; width: 300px;">Correo</span>
+            <span style="display: inline-block; width: 300px; text-align: right;">{{ correo }}</span>
+        </li>
+        <li class="list-group-item">
+            <span style="display: inline-block; width: 300px;">N° Tarjeta</span>
+            <span style="display: inline-block; width: 300px; text-align: right;">{{ tarjeta }}</span>
+        </li>
+        <li class="list-group-item">
+            <span style="display: inline-block; width: 300px;">Dirección</span>
+            <span style="display: inline-block; width: 300px; text-align: right;">{{ direccion }}</span>
+        </li>
+        <li class="list-group-item">
+            <span style="display: inline-block; width: 300px;"><b>PRODUCTOS</b></span>
+            <span style="display: inline-block; width: 300px; text-align: right;"><b>PRECIO</b></span>
+        </li>
+        {% for item in carrito_item %}
+                <li class="list-group-item">
+                    <span style="display: inline-block; width: 300px;">{{ item.producto.nombre }}</span>
+                    <span style="display: inline-block; width: 300px; text-align: right;">{{ item.producto.precio|intcomma }} <b>X</b>{{item.cantidad}}</span>
+                </li>
+        {% endfor %}
+        <li class="list-group-item">
+            <span style="display: inline-block; width: 300px;"><b>TOTAL</b></span>
+            <span style="display: inline-block; width: 300px; text-align: right;"><b>{{total_carrito|intcomma}}</b></span>
+        </li>
+    </ul>
+    <div class="card-footer d-flex justify-content-center">
+        <a href="{% url 'borrar_carrito'  %}">
+            <button class="btn btn-info " style="font-weight: bolder;width: 100%">Comprar</button>
+        </a>
+    </div>
+</div>
+
+{% endblock %}
