@@ -16,23 +16,35 @@
                       <div class="row mb-3">
                         <div class="my-2">
                             <label for="tarjeta" class="form-label">NRO TARJETA</label>
-                            <input type="number" class="form-control" id="tarjeta"  placeholder="Ingresa numero de tarjeta" name="tarjeta" >
+                            <input type="number" class="form-control" id="tarjeta"  placeholder="Ingresa numero de tarjeta" name="tarjeta" value="{{ request.POST.tarjeta }}">
+                            {% if tarjeta %}
+                            <p style="color: red;"> {{ tarjeta }} </p>
+                            {% endif %}
                         </div>
                         <div class="my-2">
                           <label for="mes" class="form-label">MES</label>
-                          <input type="number" class="form-control" id="mes"  placeholder="Ingresa mes de caducación" name="mes" maxlength=2>
+                          <input type="number" class="form-control" id="mes"  placeholder="Ingresa mes de caducación" name="mes" maxlength=2 value="{{ request.POST.mes }}">
+                          {% if mes %}
+                            <p style="color: red;"> {{ mes }} </p>
+                          {% endif %}  
                         </div>
                         <div class="my-2">
                             <label for="año" class="form-label">AÑO</label>
-                            <input type="number" class="form-control" id="año"  placeholder="Ingresa año de caducación" name="año">
+                            <input type="number" class="form-control" id="año"  placeholder="Ingresa año de caducación" name="año" value="{{ request.POST.año }}">
+                            {% if anno %}
+                            <p style="color: red;"> {{ anno }} </p>
+                            {% endif %} 
                         </div>
                         <div class="my-2">
                             <label for="codigo" class="form-label">CODIGO DE SEGURIDAD</label>
-                            <input type="number" class="form-control" id="codigo"  placeholder="Ingresa codigo de seguridad" name="codigo">
+                            <input type="number" class="form-control" id="codigo"  placeholder="Ingresa codigo de seguridad" name="codigo" value="{{ request.POST.codigo }}">
+                            {% if codigo %}
+                            <p style="color: red;"> {{ codigo }} </p>
+                            {% endif %} 
                         </div>
                         <div class="my-2">
                             <label for="direccion" class="form-label">DIRECCIÓN</label>
-                            <input type="text" class="form-control" id="direccion"  placeholder="Ingresa dirección de despacho" name="direccion">
+                            <input type="text" class="form-control" id="direccion"  placeholder="Ingresa dirección de despacho" name="direccion" value="{{ request.POST.direccion }}">
                         </div>
                         <div class="text-end">
                           <button  type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardar">
@@ -41,7 +53,6 @@
                         </div>
                         {% if mensaje %}
                             <p style="color: red;"> {{ mensaje }} </p>
-      
                         {% endif %}
                         
                     </form>

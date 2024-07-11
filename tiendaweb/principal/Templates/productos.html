@@ -3,45 +3,107 @@
 {% load humanize %}
 {% block body %}
 
-    <div class="Titulo_prod"><h1 style="text-align: center">PRODUCTOS</h1></div>
+    <div class="Titulo_prod"><h1 style="text-align: center">{{categoria}}</h1></div>
     <div id="productosIndex" class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-3">
-        {% for producto in Productos%}
-        <div class="col">
-          <div id="cards_mas_pequennias">
-            <div class="card h-100">
-              <div id="img_cards">
-                <a href="{% url 'prodvis' producto.id_producto %}">
-                  <img
-                  src="{{producto.imagen.url}}"
+        {% if user.is_authenticated%}
+         {% for producto in Productos%}
+          <div class="col">
+            <div id="cards_mas_pequennias">
+              <div class="card h-100">
+                <div id="img_cards">
+                  <a href="{% url 'prodvis' producto.id_producto %}">
+                    <img
+                    src="{{producto.imagen.url}}"
                     class="card-img-top"
-                    alt="producto"
-                  />
-                </a>
-              </div>
-                <div class="card-body">
-                  <h5 class="card-title">{{ producto.nombre }}</h5>
-                  <p class="card-text descripcion">
-                    {{ producto.descripcion }}
-                  </p>
-                </div>
-                <div class="card-footer" style="text-align: center">
-                  <p style="font-weight: bold">PRECIO: ${{ producto.precio|intcomma }}</p>
-                  <hr />
-                  <a href="{% url 'agregar_carrito' producto.id_producto %}">
-                    <button
-                      type="button"
-                      class="btn btn-success"
-                      style="margin-bottom: 5px"
-                    >
-                      AÑADIR AL CARRITO
-                    </button>
+                      alt="producto"
+                    />
                   </a>
                 </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-text descripcion">
+                      {{ producto.descripcion }}
+                    </p>
+                  </div>
+                  <div class="card-footer" style="text-align: center">
+                    <p style="font-weight: bold">PRECIO: ${{ producto.precio|intcomma }}</p>
+                    <hr />
+                    <a href="{% url 'agregar_carrito' producto.id_producto %}">
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        style="margin-bottom: 5px"
+                      >
+                        AÑADIR AL CARRITO
+                      </button>
+                    </a>
+                  </div>
+              </div>
             </div>
           </div>
-        </div>
+          {%endfor%}
+          {% else %}
+          {% for producto in Productos%}
+          <div class="col">
+            <div id="cards_mas_pequennias">
+              <div class="card h-100">
+                <div id="img_cards">
+                  <a href="{% url 'prodvis' producto.id_producto %}">
+                    <img
+                    src="{{producto.imagen.url}}"
+                    class="card-img-top"
+                      alt="producto"
+                    />
+                  </a>
+                </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-text descripcion">
+                      {{ producto.descripcion }}
+                    </p>
+                  </div>
+                  <div class="card-footer" style="text-align: center">
+                    <p style="font-weight: bold">PRECIO: ${{ producto.precio|intcomma }}</p>
+                    <hr />
+                    <a>
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        style="margin-bottom: 5px"
+                        data-bs-toggle="modal"
+                        data-bs-target="#iniciar"
+                      >
+                        AÑADIR AL CARRITO
+                      </button>
+                    </a>
+                  </div>
+              </div>
+            </div>
+          </div>
         {%endfor%}
+        {% endif %}
+        <div class="modal" tabindex="-1" id="iniciar">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Para añadir un producto debe iniciar sesión</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Inicia sesión o registrate.</p>
+              </div>
+              <div class="modal-footer">
+              <a href="{% url 'login' %}" >
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="float: left;">Iniciar Sesión</button>
+              </a>
+              <a href="{% url 'registro' %}" >
+                <button type="button" class="btn btn-success" style="float: right;">Registrarse</button>
+              </a>
+              </div>
+            </div>
+          </div>  
+        </div>
       </div>
     </div>
     <footer data-bs-theme="dark" class='footer'>©2024 DUOC UC</footer>

@@ -8,6 +8,7 @@ class Productos(models.Model):
     precio        = models.IntegerField()
     descripcion   = models.CharField(max_length=1000, null=False, default='')
     imagen        = models.ImageField(upload_to='producto')
+    marca         = models.CharField(max_length=100, null=False, default='')
     
     def __str__(self):
         return str(self.nombre)+" "+str(self.precio)   

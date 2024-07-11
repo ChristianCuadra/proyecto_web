@@ -24,5 +24,9 @@ urlpatterns = [
     path('boleta/', views.boleta, name='boleta'),
     path('comprar_producto/<int:id_producto>/', views.comprar_producto, name='comprar_producto'),
     path('listar_producto/', views.listar_productos, name='listar_prod'),
+    path('consolas/', views.consolas, name='consolas'),
+    path('celulares/', views.celulares, name='celulares'),
+    path('laptops/', views.laptops, name='laptops'),
+    path('perifericos/', views.perifericos, name='perifericos')
     
 ]

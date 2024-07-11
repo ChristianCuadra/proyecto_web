@@ -8,8 +8,9 @@ from django.http import JsonResponse
 
 
 def productos(request):
+    categoria = 'PRODUCTOS'
     datos = Productos.objects.all()
-    contexto={'Productos': datos}
+    contexto={'Productos': datos, 'categoria':categoria}
     return render(request,'productos.html', contexto)
 
 
@@ -39,13 +40,16 @@ def registro(request):
             correo = request.POST.get('email1')
             password1 = request.POST.get('password1')
             password2 = request.POST.get('password2')
-            if nombre=="" or apellido=="" or usuario=="" or correo=="" or password1=="" or password2=="": 
-                return render(request, 'registro.html', {'mensaje': 'Los campos no deben estar vacios'})
+            if nombre=="" or apellido=="" or usuario=="" or correo=="" or password1=="" or password2=="":
+                return render(request, 'registro.html', {'mensaje': 'Ningún campo debe estar vacío'})
             else:
                 if password1==password2:
-                    user = User.objects.create_user(first_name=nombre, last_name=apellido, username=usuario, email=correo, password=password1)
-                    user.save()
-                    return render(request, 'index.html', {'mensaje': 'Usuario creado correctamente'})
+                    if password1 and password2 and (len(password1) < 8 or len(password1) > 25 or len(password2) < 8 or len(password2) > 25):
+                        return render(request, 'registro.html', {'mensaje': 'Las contraseñas deben tener minimo 8 caracteres y máximo 25'})
+                    else:
+                        user = User.objects.create_user(first_name=nombre, last_name=apellido, username=usuario, email=correo, password=password1)
+                        user.save()
+                        return render(request, 'index.html', {'mensaje': 'Usuario creado correctamente'})
                 else:
                     return render(request, 'registro.html', {'mensaje': 'Las contraseñas no coinciden'})
         elif request.method=='GET':
@@ -140,6 +144,7 @@ def modificar_prod(request, id_producto):
         precio = request.POST.get('precio')
         descripcion = request.POST.get('descripcion')
         imagen  = request.FILES.get('imagen')
+        marca   = request.POST.get('marca')
         if request.method == 'POST':
             if nombre:
                 producto.nombre = nombre
@@ -155,6 +160,9 @@ def modificar_prod(request, id_producto):
                 producto.save()
             if imagen:
                 producto.imagen = imagen
+                producto.save()
+            if marca:
+                producto.marca = marca
                 producto.save()
             return redirect('administrar')
         elif request.method == 'GET':
@@ -173,10 +181,11 @@ def agregar_productos(request):
                 precio = request.POST.get('precio')
                 descripcion = request.POST.get('descripcion')
                 imagen  = request.FILES.get('imagen')
-                if id_prod=="" or nombre=="" or categoria=="" or precio=="" or descripcion=="" or imagen is None: 
+                marca   = request.POST.get('marca')
+                if id_prod=="" or nombre=="" or categoria=="" or precio=="" or descripcion=="" or imagen is None or marca=="": 
                     return render(request, 'agregar_prod.html', {'mensaje': 'Los campos no deben estar vacios'})
                 else:
-                        producto = Productos.objects.create(nombre=nombre, categoria=categoria, id_producto=id_prod, precio=precio, descripcion=descripcion, imagen=imagen)
+                        producto = Productos.objects.create(nombre=nombre, categoria=categoria, id_producto=id_prod, precio=precio, descripcion=descripcion, imagen=imagen, marca=marca)
                         producto.save()
                         return redirect('administrar')
 
@@ -208,7 +217,8 @@ def listar_productos(request):
         productos = Productos.objects.filter(
             Q(nombre__icontains = busqueda ) |
             Q(categoria__icontains = busqueda) |
-            Q(precio__icontains = busqueda)
+            Q(precio__icontains = busqueda) |
+            Q(marca__icontains = busqueda)
         ).distinct()
     else:
         productos = Productos.objects.all()
@@ -261,8 +271,17 @@ def informacion_pago(request):
                 codigo = request.POST.get('codigo')
                 direccion = request.POST.get('direccion')
                 if tarjeta=="" or mes=="" or anno=="" or codigo=="" or  direccion =="" : 
-                    return render(request, 'pago.html', {'mensaje': 'Los campos no deben estar vacios'})
+                    return render(request, 'pago.html', {'mensaje': 'Los campos no deben estar vacios.'})
                 else:
+                    if tarjeta and(len(tarjeta ) <16 or len(tarjeta)>16):
+                        return render(request,'pago.html',{'tarjeta':'Por favor, ingrese una tarjeta válida.'})
+                    elif mes and (len(mes)<2 or len(mes)>2):
+                        return render(request,'pago.html',{'mes':'Mes debe tener dos dígitos.'})
+                    elif anno and (len(anno)<2 or len(anno)>2):
+                        return render(request,'pago.html',{'anno':'Mes debe tener dos dígitos.'})
+                    elif codigo and (len(codigo)<3 or len(codigo)>3 ):
+                        return render(request,'pago.html',{'codigo':'Código de seguridad debe tener 3 dígitos'})
+                    else:
                         informacion = InformacionUsuario.objects.create(usuario= usuario, nro_tarjeta=tarjeta, codigo_seg=codigo, fecha_venc_mes=mes, fecha_venc_anno=anno, direccion=direccion)
                         informacion .save()
                         return redirect('mostrar_pedido')
@@ -332,3 +351,28 @@ def comprar_producto(request, id_producto):
 
 
     return redirect('informacion_pago')
+
+
+def consolas(request):
+    categoria = 'CONSOLA'
+    datos = Productos.objects.filter(categoria=categoria)
+    contexto = {'Productos': datos, 'categoria': categoria}
+    return render(request, 'productos.html', contexto)
+
+def celulares(request):    
+    categoria = 'CELULAR'
+    datos = Productos.objects.filter(categoria=categoria)
+    contexto = {'Productos': datos, 'categoria': categoria}
+    return render(request, 'productos.html', contexto)
+
+def laptops(request):
+    categoria = 'LAPTOP'
+    datos = Productos.objects.filter(categoria=categoria)
+    contexto = {'Productos': datos, 'categoria': categoria}
+    return render(request, 'productos.html', contexto)
+
+def perifericos(request):
+    categoria = 'PERIFERICOS'
+    datos = Productos.objects.filter(categoria=categoria)
+    contexto = {'Productos': datos, 'categoria': categoria}
+    return render(request, 'productos.html', contexto)
