@@ -2,34 +2,37 @@
 {% load static %}
 {% load humanize %}
 {% block body %}
-<div class="card" style="width: 40rem;">
-    <div class="card-header text-center" data-bs-theme="dark">
-        <h3>¡MUCHAS GRACIAS POR TU COMPRA!</h3>
-        <p>La información del pedido y la boleta serán enviadas al correo {{correo}} en la brevedad</p>
-    </div>
-        <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <span style="display: inline-block; width: 300px;">N° Tarjeta</span>
-            <span style="display: inline-block; width: 300px; text-align: right;">{{ tarjeta }}</span>
-        </li>
-        <li class="list-group-item">
-            <span style="display: inline-block; width: 300px;">Dirección</span>
-            <span style="display: inline-block; width: 300px; text-align: right;">{{ direccion }}</span>
-        </li>
-        <li class="list-group-item">
-            <span style="display: inline-block; width: 300px;"><b>PRODUCTOS</b></span>
-            <span style="display: inline-block; width: 300px; text-align: right;"><b>PRECIO</b></span>
-        </li>
-        {% for item in carrito_item %}
-                <li class="list-group-item">
-                    <span style="display: inline-block; width: 300px;">{{ item.producto.nombre }}</span>
-                    <span style="display: inline-block; width: 300px; text-align: right;">{{ item.producto.precio|intcomma }} <b>X</b>{{item.cantidad}}</span>
-                </li>
-        {% endfor %}
-        <li class="list-group-item">
-            <span style="display: inline-block; width: 300px;"><b>TOTAL</b></span>
-            <span style="display: inline-block; width: 300px; text-align: right;"><b>{{total_carrito|intcomma}}</b></span>
-        </li>
-    </ul>
+<div class="container mt-4 mb-5" style="display: flex; justify-content:center;">
+    <div class="card" style="width: 40rem;">
+        <div class="card-header text-center" data-bs-theme="dark">
+            <h3>¡MUCHAS GRACIAS POR TU COMPRA!</h3>
+            <p>La información del pedido y la boleta serán enviadas al correo {{correo}} en la brevedad</p>
+        </div>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <span style="display: inline-block; width: 300px;">N° Tarjeta</span>
+                <span style="display: inline-block; width: 300px; text-align: right;">{{ tarjeta }}</span>
+            </li>
+            <li class="list-group-item">
+                <span style="display: inline-block; width: 300px;">Dirección</span>
+                <span style="display: inline-block; width: 300px; text-align: right;">{{ direccion }}</span>
+            </li>
+            <li class="list-group-item">
+                <span style="display: inline-block; width: 300px;"><b>PRODUCTOS</b></span>
+                <span style="display: inline-block; width: 300px; text-align: right;"><b>PRECIO</b></span>
+            </li>
+            {% for item in carrito_item %}
+                    <li class="list-group-item">
+                        <span style="display: inline-block; width: 300px;">{{ item.producto.nombre }}</span>
+                        <span style="display: inline-block; width: 300px; text-align: right;">{{ item.producto.precio|intcomma }} <b>X</b>{{item.cantidad}}</span>
+                    </li>
+            {% endfor %}
+            <li class="list-group-item">
+                <span style="display: inline-block; width: 300px;"><b>TOTAL</b></span>
+                <span style="display: inline-block; width: 300px; text-align: right;"><b>{{total_carrito|intcomma}}</b></span>
+            </li>
+        </ul>
+    </div>   
 </div>
+
 {% endblock %}
