@@ -281,7 +281,7 @@ def informacion_pago(request):
                     elif mes and (len(mes)<2 or len(mes)>2):
                         return render(request,'pago.html',{'mes':'Mes debe tener dos dígitos.'})
                     elif anno and (len(anno)<2 or len(anno)>2):
-                        return render(request,'pago.html',{'anno':'Mes debe tener dos dígitos.'})
+                        return render(request,'pago.html',{'anno':'Año debe tener dos dígitos.'})
                     elif codigo and (len(codigo)<3 or len(codigo)>3 ):
                         return render(request,'pago.html',{'codigo':'Código de seguridad debe tener 3 dígitos'})
                     else:
