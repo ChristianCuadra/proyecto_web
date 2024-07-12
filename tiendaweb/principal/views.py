@@ -4,13 +4,13 @@ from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.db import IntegrityError
 from django.db.models import Q
 from .models import Productos, Carrito, CarritoItem, InformacionUsuario
-from django.http import JsonResponse
+
 
 
 def productos(request):
-    categoria = 'PRODUCTOS'
+    titulo = 'PRODUCTOS'
     datos = Productos.objects.all()
-    contexto={'Productos': datos, 'categoria':categoria}
+    contexto = {'Productos': datos, 'titulo': titulo}
     return render(request,'productos.html', contexto)
 
 
@@ -212,6 +212,7 @@ def producto_vision(request, id_producto):
 def listar_productos(request):
     busqueda = request.GET.get('buscar')
     productos = Productos.objects.all()
+    titulo = 'PRODUCTOS'
         
     if busqueda:
         productos = Productos.objects.filter(
@@ -223,12 +224,9 @@ def listar_productos(request):
     else:
         productos = Productos.objects.all()
      
-    contexto={'Productos': productos, 'busqueda':busqueda}
+    contexto={'Productos': productos, 'busqueda':busqueda, 'titulo':titulo}
 
-    return render (request, 'productos.html', contexto)
-
-
-    
+    return render (request, 'productos.html', contexto)   
     
 def agregar_carrito(request, id_producto):
     producto = get_object_or_404(Productos, id_producto=id_producto)
@@ -245,9 +243,14 @@ def agregar_carrito(request, id_producto):
     return redirect('mostrar_carrito')
 
 def mostrar_carrito(request):
-    carrito = Carrito.objects.get(usuario=request.user)
-    carrito_item = CarritoItem.objects.filter(carrito=carrito)
-    total_carrito = sum(item.producto.precio * item.cantidad for item in carrito_item)
+    try:
+        carrito = Carrito.objects.get(usuario=request.user)
+        carrito_item = CarritoItem.objects.filter(carrito=carrito)
+        total_carrito = sum(item.producto.precio * item.cantidad for item in carrito_item)
+    except Carrito.DoesNotExist:
+        carrito = Carrito.objects.create(usuario=request.user)
+        carrito_item = []
+        total_carrito = 0
     
     return render(request, 'carrito.html', {'carrito_item':carrito_item, 'total_carrito':total_carrito})
 
@@ -354,25 +357,29 @@ def comprar_producto(request, id_producto):
 
 
 def consolas(request):
+    titulo = 'CONSOLAS'
     categoria = 'CONSOLA'
     datos = Productos.objects.filter(categoria=categoria)
-    contexto = {'Productos': datos, 'categoria': categoria}
+    contexto = {'Productos': datos, 'titulo': titulo}
     return render(request, 'productos.html', contexto)
 
 def celulares(request):    
+    titulo = 'CELULARES'
     categoria = 'CELULAR'
     datos = Productos.objects.filter(categoria=categoria)
-    contexto = {'Productos': datos, 'categoria': categoria}
+    contexto = {'Productos': datos, 'titulo': titulo}
     return render(request, 'productos.html', contexto)
 
 def laptops(request):
+    titulo = 'LAPTOPS'
     categoria = 'LAPTOP'
     datos = Productos.objects.filter(categoria=categoria)
-    contexto = {'Productos': datos, 'categoria': categoria}
+    contexto = {'Productos': datos, 'titulo': titulo}
     return render(request, 'productos.html', contexto)
 
 def perifericos(request):
+    titulo = 'PERIFERICOS'
     categoria = 'PERIFERICOS'
     datos = Productos.objects.filter(categoria=categoria)
-    contexto = {'Productos': datos, 'categoria': categoria}
+    contexto = {'Productos': datos, 'titulo': titulo}
     return render(request, 'productos.html', contexto)

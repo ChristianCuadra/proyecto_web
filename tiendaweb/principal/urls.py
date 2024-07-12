@@ -27,6 +27,6 @@ urlpatterns = [
     path('consolas/', views.consolas, name='consolas'),
     path('celulares/', views.celulares, name='celulares'),
     path('laptops/', views.laptops, name='laptops'),
-    path('perifericos/', views.perifericos, name='perifericos')
+    path('perifericos/', views.perifericos, name='perifericos'),
     
 ]

@@ -3,7 +3,7 @@
 {% load humanize %}
 {% block body %}
 
-    <div class="Titulo_prod"><h1 style="text-align: center">{{categoria}}</h1></div>
+    <div class="Titulo_prod"><h1 style="text-align: center">{{titulo}}</h1></div>
     <div id="productosIndex" class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-3">
         {% if user.is_authenticated%}

@@ -86,7 +86,7 @@
                 </a>
               </li>
             </ul>
-            <form class="d-flex" role="search" style="margin-right: 30%" method='GET' value='{{request.GET.buscar}}', action="{% url 'listar_prod' %}">
+            <form class="d-flex" role="search" style="margin-right: 30%" method='GET' value='{{request.GET.buscar}}' action="{% url 'listar_prod' %}">
               <input
                 class="form-control me-2"
                 type="search"
@@ -109,7 +109,11 @@
                 aria-expanded="false"
                 style="color: white;"
               >
-                Información
+              {% if user.is_authenticated %}
+              <img src="{% static 'fotos/usuario.png' %}"/>
+              {% else %}
+              <img src="{% static 'fotos/usuario_no.webp' %}"/>
+              {% endif %}
               </a>
               <ul class="dropdown-menu">
               {% if user.is_authenticated %}

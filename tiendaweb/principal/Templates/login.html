@@ -24,9 +24,20 @@
                   <input type="password" class="form-control" id="password1" placeholder="Ingresa Contraseña"  min="8" maxlength="25" name="password1">
                   <span id="spancontra"  style="color: red;" style="font-size: 14px ;" style="font-family: Arial, Helvetica, sans-serif;"></span> 
                 </div>
+                <div class="mb-3">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                    <label class="form-check-label" for="dropdownCheck">
+                      Recordarme
+                    </label>
+                  </div>
+                </div>
+                <div>
+                <a class="dropdown-item" href="{% url 'registro' %}">No tienes cuenta? Crea una aqui</a>
+                </div>
                 <div class="text-end">
                   <button  onclick="validar()"     type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardar">
-                    Guardar informacion
+                    Ingresar
                   </button>
                 </div>
               </div>
